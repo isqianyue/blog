@@ -205,6 +205,8 @@
 <p>Paragraph：从某种意义上来讲，每个shape有点像是自成一个docx文档，因为每个Shape由一堆Paragraph组成，而Paragraph又是由一堆run组成。</p>
 <p>run：见上。对run块的理解，可以参考之前在python-docx一文中对run的介绍；</p>
 <p>Placeholder：即占位符，算是幻灯片母版中的一个概念，你生成一个空白幻灯片之后，总会出现“单击此处添加文本”之类的，这些方框就被叫做占位符，按照我的理解，其实就是一些特殊的Shape。（后来在官方文档里也看到了这样的描述，即A placeholder is a shape¶）</p>
+<img src="/2023/09/26/python-pptx%E5%8C%85/placeholder.png" class="" title="This is an image">
+
 <p>官方demo<br>老规矩，还是从官方demo的基础上做介绍。</p>
 <p>简单生成一页PPT：</p>
 <p>from pptx import Presentation</p>
@@ -215,20 +217,20 @@
 <h1 id="取出索引为1的占位符对象，第0个占位符对象其实就是上面的title对象"><a href="#取出索引为1的占位符对象，第0个占位符对象其实就是上面的title对象" class="headerlink" title="取出索引为1的占位符对象，第0个占位符对象其实就是上面的title对象"></a>取出索引为1的占位符对象，第0个占位符对象其实就是上面的title对象</h1><p>subtitle &#x3D; slide.placeholders[1]</p>
 <h1 id="为其文本属性赋值"><a href="#为其文本属性赋值" class="headerlink" title="为其文本属性赋值"></a>为其文本属性赋值</h1><p>title.text &#x3D; “Hello, World!”<br>subtitle.text &#x3D; “python-pptx was here!”</p>
 <h1 id="保存文件"><a href="#保存文件" class="headerlink" title="保存文件"></a>保存文件</h1><p>prs.save(‘test.pptx’)</p>
-<p>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15<br>16<br>17<br>18<br>19<br>需要说一下母版样式slide_layouts，每个PPT默认带有11个母版版式，即：</p>
+<p>需要说一下母版样式slide_layouts，每个PPT默认带有11个母版版式，即：</p>
 <p>可以在代码中用以下做验证：</p>
-<h1 id="一个空白的PPTX模板有多少个母版样式"><a href="#一个空白的PPTX模板有多少个母版样式" class="headerlink" title="一个空白的PPTX模板有多少个母版样式"></a>一个空白的PPTX模板有多少个母版样式</h1><p>print(len(prs.slide_layouts))<br>1<br>2<br>简单的已经过了，再上个稍微有点难度的。</p>
+<h1 id="一个空白的PPTX模板有多少个母版样式"><a href="#一个空白的PPTX模板有多少个母版样式" class="headerlink" title="一个空白的PPTX模板有多少个母版样式"></a>一个空白的PPTX模板有多少个母版样式</h1><p>print(len(prs.slide_layouts))<br>简单的已经过了，再上个稍微有点难度的。</p>
 <p>高阶引申<br>如何查看占位符ID？<br>下面实例里，把每个占位符的ID等信息直接打在了text上。</p>
 <p>from pptx import Presentation</p>
 <p>prs &#x3D; Presentation()</p>
 <h1 id="prs-slide-layouts-表示的是ppt中不同的版式"><a href="#prs-slide-layouts-表示的是ppt中不同的版式" class="headerlink" title="prs.slide_layouts[]表示的是ppt中不同的版式"></a>prs.slide_layouts[]表示的是ppt中不同的版式</h1><p>slide &#x3D; prs.slides.add_slide(prs.slide_layouts[0])<br>for shape in slide.placeholders:<br>    phf &#x3D; shape.placeholder_format<br>    print(f”{phf.idx}–{shape.name}–{phf.type}”)   # f表示字符串内支持大括号内的python表达式<br>    shape.text &#x3D; f”{phf.idx}–{shape.name}–{phf.type}”</p>
-<p>prs.save(‘占位符.pptx’)<br>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>怎么拿幻灯片页里的所有文字？</p>
+<p>prs.save(‘占位符.pptx’)</p>
+<p>怎么拿幻灯片页里的所有文字？</p>
 <p>from pptx import Presentation</p>
 <p>prs &#x3D; Presentation(path_to_presentation)</p>
 <h1 id="text-runs-will-be-populated-with-a-list-of-strings"><a href="#text-runs-will-be-populated-with-a-list-of-strings" class="headerlink" title="text_runs will be populated with a list of strings,"></a>text_runs will be populated with a list of strings,</h1><h1 id="one-for-each-text-run-in-presentation"><a href="#one-for-each-text-run-in-presentation" class="headerlink" title="one for each text run in presentation"></a>one for each text run in presentation</h1><p>text_runs &#x3D; []</p>
 <p>for slide in prs.slides:<br>    for shape in slide.shapes:<br>        # 并不是所有的shape都有text_frame，所以如果你不想有exception的话，就需要手动check一下<br>        if not shape.has_text_frame:<br>            continue<br>        for paragraph in shape.text_frame.paragraphs:<br>            for run in paragraph.runs:<br>                text_runs.append(run.text)</p>
-<p>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15<br>16<br>参考文献<br>python-pptx官方文档<br>python自动化办公手册之python操作PPT 不错的样例讲解<br>python自动化办公——python操作Excel、Word、PDF集合大全 比较全面的样例讲解，唯一的问题是网页的黑色背景，感觉不是很好看哈哈哈哈哈<br>文章知识点与官方知识档案匹配，可进一步学习相关知识<br>Python入门技能树首页概览343933 人正在系统学习中</p>
-<p>经年藏殊<br>关注</p>
+<p>参考文献<br>python-pptx官方文档<br>python自动化办公手册之python操作PPT 不错的样例讲解<br>python自动化办公——python操作Excel、Word、PDF集合大全 比较全面的样例讲解，唯一的问题是网页的黑色背景，感觉不是很好看哈哈哈哈哈</p>
 <p>————————————————<br>版权声明：本文为CSDN博主「经年藏殊」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。<br>原文链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/wlh2220133699/article/details/131737633">https://blog.csdn.net/wlh2220133699/article/details/131737633</a></p>
 
     
@@ -672,7 +674,8 @@
 <p>但是经过千辛万苦，我终于找到了一种快速下载的方式，步骤如下：</p>
 <p>1.首先进入官方下载地址页面，点击下载。VScode官方地址：<a target="_blank" rel="noopener" href="https://code.visualstudio.com/">https://code.visualstudio.com/</a></p>
 <p>找到官方下载的软件，复制下载地址：</p>
-<p><img src="https://s2.51cto.com/images/blog/202106/01/f124e27ff8e720cc91e7082c4a72348d.png?x-oss-process=image/watermark,size_16,text_QDUxQ1RP5Y2a5a6i,color_FFFFFF,t_30,g_se,x_10,y_10,shadow_20,type_ZmFuZ3poZW5naGVpdGk=/format,webp/resize,m_fixed,w_1184" alt="VScode快速下载方法_mac_02"></p>
+<img src="/2023/09/26/vscode%E5%BF%AB%E9%80%9F%E4%B8%8B%E8%BD%BD/img.webp" class="" title="This is an image">
+
 <p>2.更改国内镜像地址前缀：<a target="_blank" rel="noopener" href="http://vscode.cdn.azure.cn/">http://vscode.cdn.azure.cn</a><br>那么下载地址即为：<a target="_blank" rel="noopener" href="http://vscode.cdn.azure.cn/stable/622cb03f7e070a9670c94bae1a45d78d7181fbd4/VSCode-darwin.zip">http://vscode.cdn.azure.cn/stable/622cb03f7e070a9670c94bae1a45d78d7181fbd4/VSCode-darwin.zip</a></p>
 <hr>
 <p>©著作权归作者所有：来自51CTO博客作者wugenqiang的原创作品，请联系作者获取转载授权，否则将追究法律责任<br>VScode快速下载方法<br><a target="_blank" rel="noopener" href="https://blog.51cto.com/u_12877374/2866940">https://blog.51cto.com/u_12877374/2866940</a></p>
@@ -855,7 +858,7 @@
   <div class="article-entry" itemprop="articleBody">
     
     <p>表格排序</p>
-<p>参考：<a target="_blank" rel="noopener" href="https://blog.csdn.net/lvdoubing81/article/details/121819773">https://blog.csdn.net/lvdoubing81/article/details/121819773</a></p>
+<p>来源：<a target="_blank" rel="noopener" href="https://blog.csdn.net/lvdoubing81/article/details/121819773">https://blog.csdn.net/lvdoubing81/article/details/121819773</a></p>
 <p>今天表格自定义排序上出了点问题，检查发现是自身的疏忽，然后再解决问题的时候收获到了一些小知识。所以记录一下。</p>
 <p>首先是 sort-change<br>sort-change 是 element表格用来监听排序变化的，只有当表格排序发生变化，才会触发这个事件，它并不只是监听某一列的排序，而是整个表格，所以它是要写在el-table上的，而不是el-table-column上。别写错地方了。</p>
 <p>sort-change 主要有三个参数{ column, prop, order }</p>
@@ -871,6 +874,7 @@ sortMethod(a, b) &#123;
 </code></pre>
 <p>————————————————<br>版权声明：本文为CSDN博主「半个灰太狼」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。<br>原文链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/lvdoubing81/article/details/121819773">https://blog.csdn.net/lvdoubing81/article/details/121819773</a></p>
 <hr>
+<p>应用：</p>
 <p> &#x2F;&#x2F; 拦截率排序</p>
 <p>​    sortRiskRate(a, b) {</p>
 <p>​      return a.risk_rate.split(“%”)[0] - b.risk_rate.split(“%”)[0];</p>
@@ -972,7 +976,8 @@ sortMethod(a, b) &#123;
   
   <div class="article-entry" itemprop="articleBody">
     
-    <p>转自：<code>乔一亖</code><br>地址：<code>https://www.cnblogs.com/joyce33/p/13376752.html</code><br>感谢作者的辛苦付出，尊重版权，从我做起。</p>
+    <p>来源：<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/e0471aa6672d">https://www.jianshu.com/p/e0471aa6672d</a></p>
+<p>转自：<code>乔一亖</code><br>地址：<code>https://www.cnblogs.com/joyce33/p/13376752.html</code><br>感谢作者的辛苦付出，尊重版权，从我做起。</p>
 <hr>
 <blockquote>
 <p>世上无难事，只要找到 Homebrew 的正确安装方式。</p>

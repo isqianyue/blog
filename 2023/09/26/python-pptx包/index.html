@@ -18,8 +18,9 @@
 <meta property="og:description" content="python-pptx包是用来自动化处理ppt的。 使用的第一步是安装 pip install python-pptx 能做什么 读取&#x2F;修改已有PPT内的内容，从0开始创建一个新的PPT，并可以实现所有你平时手动做的所有内容，甚至如果你不怕麻烦的话，你还可以用它生成图表，修改图表数据。 PPT要素介绍在使用python操作PPT之前，首先要清楚PPT的结构，以便于后续更好的理解代码的编写">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/2023/09/26/python-pptx%E5%8C%85/pptjiegou.png">
+<meta property="og:image" content="http://example.com/2023/09/26/python-pptx%E5%8C%85/placeholder.png">
 <meta property="article:published_time" content="2023-09-26T08:44:30.000Z">
-<meta property="article:modified_time" content="2023-09-26T08:59:16.469Z">
+<meta property="article:modified_time" content="2023-09-26T09:02:47.108Z">
 <meta property="article:author" content="Olivia">
 <meta property="article:tag" content="python">
 <meta name="twitter:card" content="summary">
@@ -187,7 +188,7 @@
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">1k字</span>
+      <span class="post-count">964字</span>
     </span>
   </span>
 
@@ -196,7 +197,7 @@
     <span class="post-meta-item-icon">
       <i class="icon-book icon"></i>
       <span class="post-meta-item-text"> 阅读时长≈</span>
-      <span class="post-count">4分</span>
+      <span class="post-count">3分</span>
     </span>
   </span>
 </div>
@@ -222,6 +223,8 @@
 <p>Paragraph：从某种意义上来讲，每个shape有点像是自成一个docx文档，因为每个Shape由一堆Paragraph组成，而Paragraph又是由一堆run组成。</p>
 <p>run：见上。对run块的理解，可以参考之前在python-docx一文中对run的介绍；</p>
 <p>Placeholder：即占位符，算是幻灯片母版中的一个概念，你生成一个空白幻灯片之后，总会出现“单击此处添加文本”之类的，这些方框就被叫做占位符，按照我的理解，其实就是一些特殊的Shape。（后来在官方文档里也看到了这样的描述，即A placeholder is a shape¶）</p>
+<img src="/2023/09/26/python-pptx%E5%8C%85/placeholder.png" class="" title="This is an image">
+
 <p>官方demo<br>老规矩，还是从官方demo的基础上做介绍。</p>
 <p>简单生成一页PPT：</p>
 <p>from pptx import Presentation</p>
@@ -232,20 +235,20 @@
 <h1 id="取出索引为1的占位符对象，第0个占位符对象其实就是上面的title对象"><a href="#取出索引为1的占位符对象，第0个占位符对象其实就是上面的title对象" class="headerlink" title="取出索引为1的占位符对象，第0个占位符对象其实就是上面的title对象"></a>取出索引为1的占位符对象，第0个占位符对象其实就是上面的title对象</h1><p>subtitle &#x3D; slide.placeholders[1]</p>
 <h1 id="为其文本属性赋值"><a href="#为其文本属性赋值" class="headerlink" title="为其文本属性赋值"></a>为其文本属性赋值</h1><p>title.text &#x3D; “Hello, World!”<br>subtitle.text &#x3D; “python-pptx was here!”</p>
 <h1 id="保存文件"><a href="#保存文件" class="headerlink" title="保存文件"></a>保存文件</h1><p>prs.save(‘test.pptx’)</p>
-<p>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15<br>16<br>17<br>18<br>19<br>需要说一下母版样式slide_layouts，每个PPT默认带有11个母版版式，即：</p>
+<p>需要说一下母版样式slide_layouts，每个PPT默认带有11个母版版式，即：</p>
 <p>可以在代码中用以下做验证：</p>
-<h1 id="一个空白的PPTX模板有多少个母版样式"><a href="#一个空白的PPTX模板有多少个母版样式" class="headerlink" title="一个空白的PPTX模板有多少个母版样式"></a>一个空白的PPTX模板有多少个母版样式</h1><p>print(len(prs.slide_layouts))<br>1<br>2<br>简单的已经过了，再上个稍微有点难度的。</p>
+<h1 id="一个空白的PPTX模板有多少个母版样式"><a href="#一个空白的PPTX模板有多少个母版样式" class="headerlink" title="一个空白的PPTX模板有多少个母版样式"></a>一个空白的PPTX模板有多少个母版样式</h1><p>print(len(prs.slide_layouts))<br>简单的已经过了，再上个稍微有点难度的。</p>
 <p>高阶引申<br>如何查看占位符ID？<br>下面实例里，把每个占位符的ID等信息直接打在了text上。</p>
 <p>from pptx import Presentation</p>
 <p>prs &#x3D; Presentation()</p>
 <h1 id="prs-slide-layouts-表示的是ppt中不同的版式"><a href="#prs-slide-layouts-表示的是ppt中不同的版式" class="headerlink" title="prs.slide_layouts[]表示的是ppt中不同的版式"></a>prs.slide_layouts[]表示的是ppt中不同的版式</h1><p>slide &#x3D; prs.slides.add_slide(prs.slide_layouts[0])<br>for shape in slide.placeholders:<br>    phf &#x3D; shape.placeholder_format<br>    print(f”{phf.idx}–{shape.name}–{phf.type}”)   # f表示字符串内支持大括号内的python表达式<br>    shape.text &#x3D; f”{phf.idx}–{shape.name}–{phf.type}”</p>
-<p>prs.save(‘占位符.pptx’)<br>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>怎么拿幻灯片页里的所有文字？</p>
+<p>prs.save(‘占位符.pptx’)</p>
+<p>怎么拿幻灯片页里的所有文字？</p>
 <p>from pptx import Presentation</p>
 <p>prs &#x3D; Presentation(path_to_presentation)</p>
 <h1 id="text-runs-will-be-populated-with-a-list-of-strings"><a href="#text-runs-will-be-populated-with-a-list-of-strings" class="headerlink" title="text_runs will be populated with a list of strings,"></a>text_runs will be populated with a list of strings,</h1><h1 id="one-for-each-text-run-in-presentation"><a href="#one-for-each-text-run-in-presentation" class="headerlink" title="one for each text run in presentation"></a>one for each text run in presentation</h1><p>text_runs &#x3D; []</p>
 <p>for slide in prs.slides:<br>    for shape in slide.shapes:<br>        # 并不是所有的shape都有text_frame，所以如果你不想有exception的话，就需要手动check一下<br>        if not shape.has_text_frame:<br>            continue<br>        for paragraph in shape.text_frame.paragraphs:<br>            for run in paragraph.runs:<br>                text_runs.append(run.text)</p>
-<p>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15<br>16<br>参考文献<br>python-pptx官方文档<br>python自动化办公手册之python操作PPT 不错的样例讲解<br>python自动化办公——python操作Excel、Word、PDF集合大全 比较全面的样例讲解，唯一的问题是网页的黑色背景，感觉不是很好看哈哈哈哈哈<br>文章知识点与官方知识档案匹配，可进一步学习相关知识<br>Python入门技能树首页概览343933 人正在系统学习中</p>
-<p>经年藏殊<br>关注</p>
+<p>参考文献<br>python-pptx官方文档<br>python自动化办公手册之python操作PPT 不错的样例讲解<br>python自动化办公——python操作Excel、Word、PDF集合大全 比较全面的样例讲解，唯一的问题是网页的黑色背景，感觉不是很好看哈哈哈哈哈</p>
 <p>————————————————<br>版权声明：本文为CSDN博主「经年藏殊」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。<br>原文链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/wlh2220133699/article/details/131737633">https://blog.csdn.net/wlh2220133699/article/details/131737633</a></p>
 
     

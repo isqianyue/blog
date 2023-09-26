@@ -10,15 +10,15 @@
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="表格排序 参考：https:&#x2F;&#x2F;blog.csdn.net&#x2F;lvdoubing81&#x2F;article&#x2F;details&#x2F;121819773 今天表格自定义排序上出了点问题，检查发现是自身的疏忽，然后再解决问题的时候收获到了一些小知识。所以记录一下。 首先是 sort-changesort-change 是 element表格用来监听排序变化的，只有当表格排序发生变化，才会触发这个事件，它并不只是监听某">
+  <meta name="description" content="表格排序 来源：https:&#x2F;&#x2F;blog.csdn.net&#x2F;lvdoubing81&#x2F;article&#x2F;details&#x2F;121819773 今天表格自定义排序上出了点问题，检查发现是自身的疏忽，然后再解决问题的时候收获到了一些小知识。所以记录一下。 首先是 sort-changesort-change 是 element表格用来监听排序变化的，只有当表格排序发生变化，才会触发这个事件，它并不只是监听某">
 <meta property="og:type" content="article">
 <meta property="og:title" content="elementui学习">
 <meta property="og:url" content="http://example.com/2023/09/26/elementui%E5%AD%A6%E4%B9%A0/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="表格排序 参考：https:&#x2F;&#x2F;blog.csdn.net&#x2F;lvdoubing81&#x2F;article&#x2F;details&#x2F;121819773 今天表格自定义排序上出了点问题，检查发现是自身的疏忽，然后再解决问题的时候收获到了一些小知识。所以记录一下。 首先是 sort-changesort-change 是 element表格用来监听排序变化的，只有当表格排序发生变化，才会触发这个事件，它并不只是监听某">
+<meta property="og:description" content="表格排序 来源：https:&#x2F;&#x2F;blog.csdn.net&#x2F;lvdoubing81&#x2F;article&#x2F;details&#x2F;121819773 今天表格自定义排序上出了点问题，检查发现是自身的疏忽，然后再解决问题的时候收获到了一些小知识。所以记录一下。 首先是 sort-changesort-change 是 element表格用来监听排序变化的，只有当表格排序发生变化，才会触发这个事件，它并不只是监听某">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-09-26T07:14:27.000Z">
-<meta property="article:modified_time" content="2023-09-26T08:13:37.906Z">
+<meta property="article:modified_time" content="2023-09-26T09:11:42.385Z">
 <meta property="article:author" content="Olivia">
 <meta name="twitter:card" content="summary">
   
@@ -184,7 +184,7 @@
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">709字</span>
+      <span class="post-count">711字</span>
     </span>
   </span>
 
@@ -205,7 +205,7 @@
   <div class="article-entry" itemprop="articleBody">
     
     <p>表格排序</p>
-<p>参考：<a target="_blank" rel="noopener" href="https://blog.csdn.net/lvdoubing81/article/details/121819773">https://blog.csdn.net/lvdoubing81/article/details/121819773</a></p>
+<p>来源：<a target="_blank" rel="noopener" href="https://blog.csdn.net/lvdoubing81/article/details/121819773">https://blog.csdn.net/lvdoubing81/article/details/121819773</a></p>
 <p>今天表格自定义排序上出了点问题，检查发现是自身的疏忽，然后再解决问题的时候收获到了一些小知识。所以记录一下。</p>
 <p>首先是 sort-change<br>sort-change 是 element表格用来监听排序变化的，只有当表格排序发生变化，才会触发这个事件，它并不只是监听某一列的排序，而是整个表格，所以它是要写在el-table上的，而不是el-table-column上。别写错地方了。</p>
 <p>sort-change 主要有三个参数{ column, prop, order }</p>
@@ -221,6 +221,7 @@ sortMethod(a, b) &#123;
 </code></pre>
 <p>————————————————<br>版权声明：本文为CSDN博主「半个灰太狼」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。<br>原文链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/lvdoubing81/article/details/121819773">https://blog.csdn.net/lvdoubing81/article/details/121819773</a></p>
 <hr>
+<p>应用：</p>
 <p> &#x2F;&#x2F; 拦截率排序</p>
 <p>​    sortRiskRate(a, b) {</p>
 <p>​      return a.risk_rate.split(“%”)[0] - b.risk_rate.split(“%”)[0];</p>
