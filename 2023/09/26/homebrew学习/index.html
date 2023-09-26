@@ -17,14 +17,14 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="来源：https:&#x2F;&#x2F;www.jianshu.com&#x2F;p&#x2F;e0471aa6672d 转自：乔一亖地址：https:&#x2F;&#x2F;www.cnblogs.com&#x2F;joyce33&#x2F;p&#x2F;13376752.html感谢作者的辛苦付出，尊重版权，从我做起。   世上无难事，只要找到 Homebrew 的正确安装方式。  Homebrew 是什么Homebrew是 mac的包管理器，仅需执行相应的命令,就能下载安装需要">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/9599622-ec5f68577be675ab.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1200/format/webp">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/9599622-bb8d5a4ef8ccff4a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/736/format/webp">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/9599622-f57c8f269dfb66ac.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/731/format/webp">
+<meta property="og:image" content="http://example.com/2023/09/26/homebrew%E5%AD%A6%E4%B9%A0/1.webp">
+<meta property="og:image" content="http://example.com/2023/09/26/homebrew%E5%AD%A6%E4%B9%A0/2.webp">
+<meta property="og:image" content="http://example.com/2023/09/26/homebrew%E5%AD%A6%E4%B9%A0/3.webp">
 <meta property="article:published_time" content="2023-09-26T07:14:00.000Z">
-<meta property="article:modified_time" content="2023-09-26T09:14:19.925Z">
+<meta property="article:modified_time" content="2023-09-26T10:06:20.264Z">
 <meta property="article:author" content="Olivia">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/9599622-ec5f68577be675ab.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1200/format/webp">
+<meta name="twitter:image" content="http://example.com/2023/09/26/homebrew%E5%AD%A6%E4%B9%A0/1.webp">
   
   
     <link rel="icon" href="/favicon.ico">
@@ -236,7 +236,8 @@
 <p>该脚本用了中科大镜像加速访问，仅修改仓库地址部分，不会产生安全隐患。 关于中科大所提供的 Homebrew 镜像服务 <a target="_blank" rel="noopener" href="https://links.jianshu.com/go?to=https://lug.ustc.edu.cn/wiki/mirrors/help/brew.git">https://lug.ustc.edu.cn/wiki/mirrors/help/brew.git</a></p>
 </blockquote>
 <p>注：注意这里的速度，几百kib&#x2F;s或几m&#x2F;s才是正常的。若只有几kib&#x2F;s，通常为无效的安装方法，一般加载了百分之几十后就会报错。</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/9599622-ec5f68577be675ab.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1200/format/webp" alt="img"></p>
+<img src="/2023/09/26/homebrew%E5%AD%A6%E4%B9%A0/1.webp" class="" title="This is an image">
+
 <p>image</p>
 <h2 id="Homebrew-安装时如何避坑"><a href="#Homebrew-安装时如何避坑" class="headerlink" title="Homebrew 安装时如何避坑"></a>Homebrew 安装时如何避坑</h2><h3 id="1-若出现-Error-Checksum-mismatch"><a href="#1-若出现-Error-Checksum-mismatch" class="headerlink" title="1.若出现 Error: Checksum mismatch."></a>1.若出现 Error: Checksum mismatch.</h3><p>报错代码如下：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">curl: (56) LibreSSL SSL_read: SSL_ERROR_SYSCALL, errno 54</span><br><span class="line">Error: Checksum mismatch.</span><br><span class="line">Expected: b065e5e3783954f3e65d8d3a6377ca51649bfcfa21b356b0dd70490f74c6bd86</span><br><span class="line">Actual: e8a348fe5d5c2b966bab84052062f0317944122dea5fdfdc84ac6d0bd513c137</span><br><span class="line">Archive: /Users/joyce/Library/Caches/Homebrew/portable-ruby-2.6.3_2.yosemite.bottle.tar.gz</span><br><span class="line">To retry an incomplete download, remove the file above.</span><br><span class="line">Error: Failed to install Homebrew Portable Ruby (and your system version is too old)!</span><br><span class="line">Failed during: /usr/local/bin/brew update --force</span><br></pre></td></tr></table></figure>
@@ -244,13 +245,15 @@
 <p>这里是由Homebrew目录下的portable-ruby-2.6.3_2.yosemite.bottle.tar.gz文件引起的安装中断，只需要到上面对应的路径里，删掉这个文件，重新执行安装命令即可：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/bin/ruby -e &quot;$(curl -fsSL https://cdn.jsdelivr.net/gh/ineo6/homebrew-install/install)&quot;</span><br></pre></td></tr></table></figure>
 
-<h3 id="2-若卡在了Cloning-into…"><a href="#2-若卡在了Cloning-into…" class="headerlink" title="2.若卡在了Cloning into…"></a>2.若卡在了Cloning into…</h3><p><img src="https://upload-images.jianshu.io/upload_images/9599622-bb8d5a4ef8ccff4a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/736/format/webp" alt="img"></p>
+<h3 id="2-若卡在了Cloning-into…"><a href="#2-若卡在了Cloning-into…" class="headerlink" title="2.若卡在了Cloning into…"></a>2.若卡在了Cloning into…</h3><img src="/2023/09/26/homebrew%E5%AD%A6%E4%B9%A0/2.webp" class="" title="This is an image">
+
 <p>image</p>
 <p>由这里的龟速可断定卡住了，立马用Control + C中断脚本，然后执行以下命令：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd &quot;$(brew --repo)/Library/Taps/&quot;</span><br><span class="line">mkdir homebrew &amp;&amp; cd homebrew</span><br><span class="line">git clone git://mirrors.ustc.edu.cn/homebrew-core.git</span><br></pre></td></tr></table></figure>
 
 <p>执行后可看到：</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/9599622-f57c8f269dfb66ac.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/731/format/webp" alt="img"></p>
+<img src="/2023/09/26/homebrew%E5%AD%A6%E4%B9%A0/3.webp" class="" title="This is an image">
+
 <p>image</p>
 <p>速度立马快得飞起，一下子就能装好。</p>
 <p>注：最后出现 Installation successful! 或者 Checking out files: 100% (5392&#x2F;5392), done. 说明安装成功。</p>
@@ -481,11 +484,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+                <a href="javascript:void(0)" class="js-tag color4">小程序</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">小程序</a>
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
             
             <div class="clearfix"></div>
