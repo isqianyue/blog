@@ -161,6 +161,80 @@
             
 
   
+    <article id="post-test2" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2023/09/27/test2/" target="_blank">test2</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2023/09/27/test2/" class="archive-article-date">
+        <time datetime="2023-09-27T11:48:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-09-27</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2023/09/27/test2/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-nonpython问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -971,125 +1045,6 @@
     
     <p class="article-more-link">
       <a class="article-more-a" href="/2023/09/26/mac%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-elementui学习" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2023/09/26/elementui%E5%AD%A6%E4%B9%A0/" target="_blank">elementui学习</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2023/09/26/elementui%E5%AD%A6%E4%B9%A0/" class="archive-article-date">
-        <time datetime="2023-09-26T07:14:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-09-26</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <p>表格排序</p>
-<p>来源：<a target="_blank" rel="noopener" href="https://blog.csdn.net/lvdoubing81/article/details/121819773">https://blog.csdn.net/lvdoubing81/article/details/121819773</a></p>
-<p>今天表格自定义排序上出了点问题，检查发现是自身的疏忽，然后再解决问题的时候收获到了一些小知识。所以记录一下。</p>
-<p>首先是 sort-change<br>sort-change 是 element表格用来监听排序变化的，只有当表格排序发生变化，才会触发这个事件，它并不只是监听某一列的排序，而是整个表格，所以它是要写在el-table上的，而不是el-table-column上。别写错地方了。</p>
-<p>sort-change 主要有三个参数{ column, prop, order }</p>
-<p>column是发生排序变化的列。<br>order是排序方式，有三个选项 ascending 升序、descending 降序、 null 默认排序<br>prop就是该列的prop。</p>
-<p>关于sort-method<br>提sort-method之前先说一下sortable，只有在 el-table-column 的 sortable 为 true 的情况下。sort-method才有效。<br>el-table表格的每一列都可以有自己的排序方式，所以 sort-method是写在 el-table-column上的，不是在el-table上的，不要写错地方了，而且，不同于sort-change，它只是一个属性，不是事件监听，绑定的时候不要写成@sort-method&#x3D;”sortMethod”，而是应该用:sort-method&#x3D;”sortMethod”(我就是这里写错了，导致事件一直没反应&#x3D;。&#x3D;)</p>
-<p>sort-method 对数据进行排序的时候使用的方法，仅当 sortable 设置为 true 的时候有效，需返回一个数字，和 Array.sort 表现一致。</p>
-<p>比如下面就是我的排序方法，有a 、 b两个参数，跟 js的sort方法一样，不熟悉的可以去百度0.0</p>
-<p>若 a 小于 b，即 a - b 小于零，则返回一个小于零的值，数组将按照升序排列。<br>若 a 等于 b，则返回 0。<br>若 a 大于 b, 即 a - b 大于零，则返回一个大于零的值，数组将按照降序排列。<br>以上是数字排序，像字符串排序啊属性排序啊之类的。。可以自行扩展&#x3D;。&#x3D;</p>
-<pre><code>// 排序方法
-sortMethod(a, b) &#123;
-  return a - b
-&#125;,
-</code></pre>
-<p>————————————————<br>版权声明：本文为CSDN博主「半个灰太狼」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。<br>原文链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/lvdoubing81/article/details/121819773">https://blog.csdn.net/lvdoubing81/article/details/121819773</a></p>
-<hr>
-<p>应用：</p>
-<p> &#x2F;&#x2F; 拦截率排序</p>
-<p>​    sortRiskRate(a, b) {</p>
-<p>​      return a.risk_rate.split(“%”)[0] - b.risk_rate.split(“%”)[0];</p>
-<p>​    },</p>
-<p>&#x2F;&#x2F;柜台排序</p>
-<p>​    sortCounter(str1, str2) {</p>
-<p>​      return str1.counter.localeCompare(str2.counter, “zh”);</p>
-<p>​    },</p>
-<hr>
-<p>  &lt;el-table-column</p>
-<p>​            width&#x3D;”100”</p>
-<p>​            prop&#x3D;”risk_rate”</p>
-<p>​            label&#x3D;”拦截率”</p>
-<p>​            align&#x3D;”center”</p>
-<p>​            :sortable&#x3D;”true”</p>
-<p>​            :sort-method&#x3D;”sortRiskRate”</p>
-<p>​          &gt;</p>
-<p> &lt;el-table-column</p>
-<p>​            width&#x3D;”150”</p>
-<p>​            prop&#x3D;”counter”</p>
-<p>​            label&#x3D;”柜台名称”</p>
-<p>​            align&#x3D;”center”</p>
-<p>​            :sortable&#x3D;”true”</p>
-<p>​            :sort-method&#x3D;”sortCounter”</p>
-<p>​            fixed</p>
-<p>​          &gt;</p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44867717/article/details/125618165">https://blog.csdn.net/weixin_44867717/article/details/125618165</a> js 根据汉字首字母排序（省份排序） 或 根据英文首字母排序——za排序 &amp; az排序</p>
-<h1 id=""><a href="#" class="headerlink" title=""></a></h1>
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2023/09/26/elementui%E5%AD%A6%E4%B9%A0/">展开全文 >></a>
     </p>
     
 
